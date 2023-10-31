@@ -2,8 +2,8 @@ import React from 'react'
 import './style.scss';
 const PageNotFound = () => {
   return (
-    <div>
-      
+    <div style={{color : 'white'}}>
+      Page was not found
     </div>
   )
 }
