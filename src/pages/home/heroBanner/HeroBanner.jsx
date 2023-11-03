@@ -14,11 +14,11 @@ const HeroBanner = () => {
   const { url } = useSelector(state => state.home);
   const { data, loading } = useFetch('/movie/upcoming');
   useEffect(() => {
-    const bg = url.backdrop + data?.results[Math.floor(Math.random() * data?.results.length)]?.backdrop_path;
+    const bg = url.backdrop + data?.results[Math.floor(Math.random() * 19)]?.backdrop_path;
     setBackground(bg);
   }, [data]);
   const searchQueryHandler = (event) => {
-    if (event?.key === 'Enter' && query?.length > 0) {
+    if ((event?.key === 'Enter' || event === 'clicked') && query?.length > 0) {
       navigate(`/search/${query}`);
     }
   };
@@ -39,7 +39,9 @@ const HeroBanner = () => {
               onChange={(e) => setQuery(e.target.value)}
               onKeyUp={searchQueryHandler}
             />
-            <button>Search</button>
+            <button onClick={() => {
+              searchQueryHandler('clicked');
+            }}>Search</button>
           </div>
         </div>
       </ContentWrapper>
