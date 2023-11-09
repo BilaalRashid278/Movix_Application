@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import ContentWrapper from '../../../components/contentWrapper/ContentWrapper';
 import SwitchTab from '../../../components/switchTabs/SwitchTab';
 import useFetch from '../../../hooks/UseFetch';
+import Carousel from '../../../components/carousel/Carousel';
 
 const Trending = () => {
   const [endPoint, setEndPoint] = useState("day");
@@ -15,6 +16,7 @@ const Trending = () => {
         <span className='carouselTitile'>Trending</span>
         <SwitchTab onTabChange={onTabChange} data={['Day','Week']}/>
       </ContentWrapper>
+      <Carousel data={data?.results} loading={loading}/>
     </div>
   )
 }
