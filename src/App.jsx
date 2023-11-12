@@ -1,8 +1,8 @@
 import './App.scss';
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { fetchDataFromApi } from './utils/api';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getApiConfigurations, getGenres } from './app/homeSlice';
 
 import Header from './components/header/Header';
@@ -14,7 +14,7 @@ import PageNotFound from './pages/404/PageNotFound';
 import Explore from './pages/explore/Explore';
 
 const App = () => {
-  const { url } = useSelector(state => state.home);
+  // const { url } = useSelector(state => state.home);
   const dispatch = useDispatch();
   useEffect(() => {
     fetchApiConfig();
