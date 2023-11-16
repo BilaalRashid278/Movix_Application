@@ -1,4 +1,4 @@
-import React,{useRef} from "react";
+import React,{useRef, useState} from "react";
 import {
   BsFillArrowLeftCircleFill,
   BsFillArrowRightCircleFill,
@@ -15,17 +15,15 @@ import Genres from "../genres/Genres";
 import './carousel.scss';
 
 const Carousel = ({ data, loading,endPoint }) => {
+  // const [resize,setResize] = useState(0);
   const carouselContainer = useRef();
   const { url } = useSelector((state) => state.home);
   const navigate = useNavigate();
 
   const navigation = (dir) => {
     const container = carouselContainer.current;
-    const scrollAmount1 = dir === 'left' ? container.scrollLeft - (container.offsetWidth + 20) : container.scrollLeft + (container.offsetWidth + 20);
+    let scrollAmount1 = dir === 'left' ? container.scrollLeft - (container.offsetWidth + 20) : container.scrollLeft + (container.offsetWidth + 20);
     // const scrollAmount2 = dir === 'left' ? container.scrollLeft - (400 + 20) : container.scrollLeft + (400 + 20);
-    scrollNow(container,scrollAmount1);
-  }
-  const scrollNow = (container,scrollAmount1) => {
     container.scrollTo({
       left : scrollAmount1,
       behavior : 'smooth'
@@ -55,7 +53,9 @@ const Carousel = ({ data, loading,endPoint }) => {
             onClick={() => navigation('right')}
           />
           {!loading ? (
-            <div className="carouselItems" ref={carouselContainer}>
+            <div onClick={(e)=>{
+              console.log(e.screenX)
+            }} className="carouselItems" ref={carouselContainer}>
               {data?.map((item) => {
                 // console.log(item)
                 const posterUrl = item?.poster_path ? url?.poster + item.poster_path : PosterFallback

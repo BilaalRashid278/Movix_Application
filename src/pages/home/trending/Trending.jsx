@@ -10,6 +10,7 @@ const Trending = () => {
   const onTabChange = (tab) => {
     setEndPoint(tab.toLowerCase());
   };
+  
   return (
     <div className='carouselSection'>
       <ContentWrapper>
