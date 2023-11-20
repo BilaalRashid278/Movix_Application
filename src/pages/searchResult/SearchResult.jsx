@@ -29,9 +29,7 @@ const SearchResult = () => {
     fetchDataFromApi(`/search/multi?query=${query}&page=${pageNum}`).then((res) => {
       if(data?.results){
         setData({
-          page : res?.page,
-          total_pages : res?.total_pages,
-          total_results : res?.total_results,
+          ...data,
           results : [...data?.results,res?.results],
         });
         setLoading(false);
