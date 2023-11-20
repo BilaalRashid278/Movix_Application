@@ -14,12 +14,11 @@ import CircleRating from "../circleRating/CircleRation";
 import Genres from "../genres/Genres";
 import './carousel.scss';
 
-const Carousel = ({ data, loading,endPoint }) => {
+const Carousel = ({ data, loading,endPoint,title }) => {
   // const [resize,setResize] = useState(0);
   const carouselContainer = useRef();
   const { url } = useSelector((state) => state.home);
   const navigate = useNavigate();
-
   const navigation = (dir) => {
     const container = carouselContainer.current;
     let scrollAmount1 = dir === 'left' ? container.scrollLeft - (container.offsetWidth + 20) : container.scrollLeft + (container.offsetWidth + 20);
@@ -44,6 +43,7 @@ const Carousel = ({ data, loading,endPoint }) => {
     <React.Fragment>
       <div className="carousel">
         <ContentWrapper>
+          {title && <div className="carouselTitle">{title}</div>}
           <BsFillArrowLeftCircleFill
             className="carouselLeftNav arrow"
             onClick={() => navigation('left')}
@@ -57,7 +57,6 @@ const Carousel = ({ data, loading,endPoint }) => {
               console.log(e.screenX)
             }} className="carouselItems" ref={carouselContainer}>
               {data?.map((item) => {
-                // console.log(item)
                 const posterUrl = item?.poster_path ? url?.poster + item.poster_path : PosterFallback
                 return (
                   <div key={item?.id} className="carouselItem" onClick={() => navigate(`/${item?.media_type || endPoint}/${item?.id}`)}>
